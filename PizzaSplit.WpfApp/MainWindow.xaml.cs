@@ -16,6 +16,9 @@ public partial class MainWindow : Window
     public double? OrderSum { get; private set; }
     public int? CustomersCount { get; private set; }
 
+    public double Result { get; private set; }
+    public double TipsResult { get; private set; }
+
     private static readonly Regex RegexMatch = new(@"^\d+([,.]\d{0,2})?$");
     private static readonly Color ForegroundColor = Color.FromArgb(0xFF, 0x00, 0x00, 0x00);
     private static readonly Color ErrorColor = Color.FromArgb(0xFF, 0xD8, 0x34, 0x34);
@@ -194,9 +197,10 @@ public partial class MainWindow : Window
     {
         if (OrderSum != null && CustomersCount != null)
         {
-            var result = BillCalculator.CalculateOrderPerCustomer(OrderSum.Value, CustomersCount.Value);
+            Result = BillCalculator.CalculateOrderPerCustomer(OrderSum.Value, CustomersCount.Value);
+            TipsResult = Result + BillCalculator.CalculateTipsPerCustomer(OrderSum.Value, CustomersCount.Value);
 
-            ResultBlock.Text = $"{result:F2} €";
+            ResultBlock.Text = $"{(TipsCheck.IsChecked ?? false ? TipsResult : Result):F2} €";
             ResultBlock.Visibility = Visibility.Visible;
         }
         else
@@ -223,5 +227,15 @@ public partial class MainWindow : Window
         }
 
         return false;
+    }
+
+    private void CheckBox_Checked(object sender, RoutedEventArgs e)
+    {
+        ResultBlock.Text = $"{TipsResult:F2} €";
+    }
+
+    private void TipsCheck_Unchecked(object sender, RoutedEventArgs e)
+    {
+        ResultBlock.Text = $"{Result:F2} €";
     }
 }
