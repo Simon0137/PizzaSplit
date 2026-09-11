@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="PizzaSplit.Core/PizzaSplit.Core.csproj" />
+  <Project Path="PizzaSplit.WpfApp/PizzaSplit.WpfApp.csproj" />
+  <Project Path="PizzaSplit.ConsoleApp/PizzaSplit.ConsoleApp.csproj" />
+</Solution>
