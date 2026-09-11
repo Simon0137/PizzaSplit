@@ -21,6 +21,7 @@ public partial class MainWindow : Window
 
     private static readonly Regex RegexMatch = new(@"^\d+([,.]\d{0,2})?$");
     private static readonly Color ForegroundColor = Color.FromArgb(0xFF, 0x00, 0x00, 0x00);
+    private static readonly Color DefaultForegroundColor = Color.FromArgb(0xBB, 0xAB, 0xAB, 0xAB);
     private static readonly Color ErrorColor = Color.FromArgb(0xFF, 0xD8, 0x34, 0x34);
     private static readonly Color BorderColor = Color.FromArgb(0xFF, 0xAB, 0xAD, 0xB3);
 
@@ -190,7 +191,13 @@ public partial class MainWindow : Window
         box.Foreground = new SolidColorBrush(ForegroundColor);
 
         errorLabel.Visibility = Visibility.Hidden;
-        errorLabel.Content = null;
+    }
+
+    private static void ResetTextBox(TextBox box, string defaultText = "")
+    {
+        box.BorderBrush = new SolidColorBrush(BorderColor);
+        box.Foreground = new SolidColorBrush(DefaultForegroundColor);
+        box.Text = defaultText;
     }
 
     private void CalculateButton_Click(object sender, RoutedEventArgs e)
@@ -237,5 +244,24 @@ public partial class MainWindow : Window
     private void TipsCheck_Unchecked(object sender, RoutedEventArgs e)
     {
         ResultBlock.Text = $"{Result:F2} €";
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        OrderSum = null;
+        CustomersCount = null;
+
+        ResultBlock.Visibility = Visibility.Hidden;
+        ResultBlock.Text = string.Empty;
+
+        TipsCheck.IsChecked = false;
+
+        ResetTextBox(CustomerBox, ">0");
+        CustomersErrorLabel.Visibility = Visibility.Hidden;
+        _customerBoxIsEmpty = true;
+
+        ResetTextBox(OrderBox, "до 10000 €");
+        OrderErrorLabel.Visibility = Visibility.Hidden;
+        _orderBoxIsEmpty = true;
     }
 }

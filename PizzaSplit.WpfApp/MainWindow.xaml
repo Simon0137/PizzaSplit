@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Pizza Split Calculator" Height="297" Width="306" ResizeMode="CanMinimize">
+        Title="Pizza Split Calculator" Height="345" Width="306" ResizeMode="CanMinimize">
     <Window.Background>
         <ImageBrush ImageSource="/photo_2026-09-11_20-26-49.jpg"/>
     </Window.Background>
@@ -24,6 +24,7 @@
         <Label x:Name="OrderErrorLabel" Content="Order error label" HorizontalAlignment="Center" Margin="0,61,0,0" VerticalAlignment="Top" Width="235" FontSize="10"/>
         <CheckBox x:Name="TipsCheck" Content="Учитывать чаевые (10%)" HorizontalAlignment="Center" Margin="0,208,0,0" VerticalAlignment="Top" Width="235" Checked="CheckBox_Checked" Unchecked="TipsCheck_Unchecked"/>
         <Label x:Name="CustomersErrorLabel" Content="Customers error label" HorizontalAlignment="Center" Margin="0,140,0,0" VerticalAlignment="Top" Width="234" FontSize="10"/>
+        <Button x:Name="ClearButton" Content="Очистить" HorizontalAlignment="Center" Margin="0,258,0,0" VerticalAlignment="Top" Width="154" Height="30" Click="Button_Click"/>
 
     </Grid>
 </Window>
